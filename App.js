@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
 import AddTodo from './components/AddTodo';
 import Header from './components/Header';
 import TodoItem from './components/TodoItem';
@@ -11,6 +11,8 @@ export default function App() {
     { text: 'play COD', key: '3' }
   ]);
 
+  const [input, setInput] = useState('');
+
   const pressHandler = (key) => {
     setTodos((prevTodos) => (
       prevTodos.filter(todo => todo.key != key)
@@ -18,19 +20,26 @@ export default function App() {
   }
 
   const submitHandler = (text) => {
-    setTodos((prevTodos) => (
-      [
-        { text: text, key: Math.random().toString() },
-        ...prevTodos,
-      ]
-    ))
+    if (text.length > 2) {
+      setTodos((prevTodos) => (
+        [
+          { text: text, key: Math.random().toString() },
+          ...prevTodos,
+        ]
+      ));
+      setInput('');
+    } else {
+      Alert.alert('OOPS!', 'Todos must be over 2 chars long', [
+        { text: 'Okay', onPress: () => console.log('alert closed') }
+      ])
+    }
   }
 
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
-        <AddTodo submitHandler={submitHandler} />
+        <AddTodo input={input} setInput={setInput} submitHandler={submitHandler} />
         <View style={styles.list}>
           <FlatList
             data={todos}
