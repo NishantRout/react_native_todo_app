@@ -10,7 +10,7 @@ function Header() {
 }
 const styles = StyleSheet.create({
     header: {
-        height: 80,
+        height: 90,
         paddingTop: 38,
         backgroundColor: 'coral',
     },
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 20,
         fontWeight: 'bold',
-        marginTop: 7,
+        marginTop: 12,
     }
 })
 
