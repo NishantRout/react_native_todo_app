@@ -40,6 +40,8 @@ export default function App() {
   }
 
   return (
+    // <SandBox />
+
     <TouchableWithoutFeedback onPress={handleKeyboard} >
       <View style={styles.container}>
         <Header />
@@ -47,6 +49,7 @@ export default function App() {
           <AddTodo input={input} setInput={setInput} submitHandler={submitHandler} />
           <View style={styles.list}>
             <FlatList
+              showsVerticalScrollIndicator={false}
               data={todos}
               renderItem={({ item }) => (
                 <TodoItem item={item} pressHandler={pressHandler} />
@@ -66,8 +69,10 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 40,
+    flex: 1,
   },
   list: {
+    flex: 1,
     marginTop: 20,
   }
 });
